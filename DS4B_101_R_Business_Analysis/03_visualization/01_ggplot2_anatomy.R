@@ -11,8 +11,6 @@ glimpse(bike_orderlines_tbl)
 
 
 # 1.0 Anatomy of a ggplot ----
-
-
 # 1.1 How ggplot works ----
 
 # Step 1: Format data ----
@@ -35,11 +33,11 @@ g <- revenue_by_year_tbl %>%
     
     # Geometries 
     geom_line(size = 1) +
-    geom_point(size = 5) +
+    geom_point(size = 5) +  # if we want the points to be the size of the revenue    geom_point(aes(size = (revenue))
     geom_smooth(method = "lm", se = FALSE) +
     
     # Formatting
-    expand_limits(y = 0) +
+    expand_limits(y = 0) + # 
     scale_color_continuous(low = "red", high = "black",
                            labels = scales::dollar_format(scale = 1/1e6, suffix = "M")) +
     scale_y_continuous(labels = scales::dollar_format(scale = 1/1e6, suffix = "M")) +
