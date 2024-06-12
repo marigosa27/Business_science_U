@@ -304,22 +304,57 @@ separate_bike_model <- function(data, keep_model_column = TRUE, append = TRUE){
 }
 
 bikes_tbl %>% 
-    separate_bike_model() %>% View()
-
-
+    separate_bike_model() 
 
 # 6.0 SAVING AND SOURCING FUNCTIONS ----
 
 # 6.1 Create folder and file ----
+# to create a folder you use
+# fs:dir_create("00_scripts/")
 
-
+# Create the file
+path <- "DS4B_101_R_Business_Analysis/00_scripts/separate_bikes_and_outlier_detection.R"
+fs::file_create(path)
 
 # 6.2 Build and add header ----
 
+file_header_text <- str_glue(
+    "
+# SEPARATE BIKE MODELS AND DETECT OUTLIERS ----
+    
+# Separate_bike_models(): A tidy function to separate the model column into enginnered features
+    
+# detect_outliers(): A vectorized function that detect outliers using TRUE/FALSE output
+    
+# libraries ----
+library(tidyverse)
+"
+)
+# write lines writes text to a file
 
+write_lines(file_header_text, file = path)
 
 # 6.3 Add functions with dump() ----
 
+c("separate_bike_model", "detect_outliers") %>% 
+# dump writes functions to a file
+    dump(file = "DS4B_101_R_Business_Analysis/00_scripts/separate_bikes_and_outlier_detection.R",
+         append = TRUE)
 
 
 # 6.4 Source function ----
+
+rm("separate_bike_model")
+rm("detect_outliers")
+
+# source loads functions from a .R script file
+source("DS4B_101_R_Business_Analysis/00_scripts/separate_bikes_and_outlier_detection.R")
+
+bikes_tbl %>% 
+    separate_bike_model()
+
+
+
+
+
+
